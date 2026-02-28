@@ -6,15 +6,14 @@
 # - Variables (JSON Schema): https://getbruin.com/docs/bruin/getting-started/pipeline-variables
 # - Run command: https://getbruin.com/docs/bruin/commands/run
 
-# TODO: Set a pipeline name (string). This shows up in logs + `BRUIN_PIPELINE` for Python assets.
-name: nyc-taxi
+# pipeline name used for logging and environment variables
+name: nyc-taxi-pipeline
 
-# TODO: Pick a schedule ("daily", "hourly", "weekly", "monthly") or a cron string.
-schedule: daily
+# choose a reasonable schedule for ingesting monthly taxi data
+schedule: monthly
 
-# TODO: Set the earliest date this pipeline should consider for full refresh backfills.
-# Format: YYYY-MM-DD
-start_date: "2023-01-01"
+# earliest date for backfills (anything prior to data availability is harmless)
+start_date: "2022-01-01"
 
 # TODO: Configure default connections so assets can omit explicit `connection: ...`.
 # Common pattern: `duckdb: duckdb-default` for local dev.
@@ -27,7 +26,7 @@ default_connections:
 # - In SQL/YAML assets: reference as `{{ var.my_variable }}`.
 # - In Python assets: read JSON from env var `BRUIN_VARS`.
 variables:
-  # TODO: Define `taxi_types` as an array of strings with a sensible default.
+  # list of taxi categories to ingest; pipeline variable used by ingestion/trips.py
   taxi_types:
     type: array
     items:

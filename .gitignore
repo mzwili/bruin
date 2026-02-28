@@ -1,1 +1,21 @@
+# Bruin specific
 .bruin.yml
+logs/runs
+logs/*.log
+
+# Database files (Crucial: do not push your 2.9M rows to git!)
+*.db
+*.db.wal
+duckdb.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+
+# Editor / OS
+.vscode/
+.DS_Store
